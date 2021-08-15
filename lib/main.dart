@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: Home(),
   ));
 }
@@ -29,8 +30,9 @@ class _HomeState extends State<Home> {
 
   void _calculate() {
     setState(() {
-      double weight = double.parse(_weightController.text);
-      double height = double.parse(_heightController.text) / 100;
+      double weight = double.parse(_weightController.text.replaceAll(',', '.'));
+      double height =
+          double.parse(_heightController.text.replaceAll(',', '.')) / 100;
       double imc = weight / (height * height);
       print('imc = $imc');
       if (imc < 18.6) {
@@ -89,11 +91,15 @@ class _HomeState extends State<Home> {
                   return null;
                 },
                 decoration: InputDecoration(
-                  labelText: 'Peso (kg)',
-                  labelStyle: TextStyle(
-                    color: Colors.green,
-                  ),
-                ),
+                    labelText: 'Peso (kg)',
+                    labelStyle: TextStyle(
+                      color: Colors.green,
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.green,
+                      ),
+                    )),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.green,
@@ -110,11 +116,15 @@ class _HomeState extends State<Home> {
                   return null;
                 },
                 decoration: InputDecoration(
-                  labelText: 'Altura (cm)',
-                  labelStyle: TextStyle(
-                    color: Colors.green,
-                  ),
-                ),
+                    labelText: 'Altura (cm)',
+                    labelStyle: TextStyle(
+                      color: Colors.green,
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.green,
+                      ),
+                    )),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.green,
@@ -125,7 +135,7 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.symmetric(vertical: 10.0),
                 child: Container(
                   height: 50.0,
-                  child: RaisedButton(
+                  child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
                         _calculate();
@@ -138,7 +148,11 @@ class _HomeState extends State<Home> {
                         fontSize: 20.0,
                       ),
                     ),
-                    color: Colors.green,
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        Colors.green,
+                      ),
+                    ),
                   ),
                 ),
               ),

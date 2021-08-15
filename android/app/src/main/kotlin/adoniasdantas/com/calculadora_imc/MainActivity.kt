@@ -1,4 +1,4 @@
-package adoniasdantas.com.calculadora_imc
+package com.adoniasdantas.calculadora_imc
 
 import io.flutter.embedding.android.FlutterActivity
 
